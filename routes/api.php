@@ -115,7 +115,7 @@ Route::put('/user/update/afterprofile', function (Request $request) {
 
 Route::post('/user/login', function (Request $request) {
 
-   $request->validate([
+    $request->validate([
         'email' => 'required|email',
         'password' => 'required|string|min:6',
     ]);
@@ -131,13 +131,20 @@ Route::post('/user/login', function (Request $request) {
 
     // Generate random token
     $user->api_token = Str::random(60);
+    $userProfile = userProfile::where('user_ID',$user->id)->first();
+    $userData = [
+        'Data' => [
+            'userBasic' => $user,
+            'userProfile' => $userProfile,
+        ]
+    ];
+    $user->status = "active";
     $user->save();
 
     return response()->json([
         'success' => true,
         'message' => 'Login successful',
-        'user'    => $user,
-        'token'   => $user->api_token,
+        'user' => $userData,
     ], 200);
 });
 
@@ -158,6 +165,7 @@ Route::post('/user/logout', function (Request $request) {
 
     // Remove token
     $user->api_token = null;
+     $user->status = "inactive";
     $user->save();
 
     return response()->json([
