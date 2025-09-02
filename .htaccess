@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # --- Localhost par kuch na kare ---
+    RewriteCond %{HTTP_HOST} ^lmsapi\.test$ [NC]
+    RewriteRule ^ - [L]
+
+    # --- Live server (cpanel) par public/ folder use kare ---
+    RewriteCond %{HTTP_HOST} ^inhouse\.pulse-force\.com$ [NC]
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
