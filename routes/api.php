@@ -183,7 +183,7 @@ Route::post('/user/forget-password', function (Request $request) {
         'email' => 'required|email|exists:users,email',
     ]);
 
-    $token = Str::random(60);
+    $token = Str::random(6);
 
     DB::table('password_resets')->updateOrInsert(
         ['email' => $request->email],
@@ -203,7 +203,6 @@ Route::post('/user/forget-password', function (Request $request) {
     return response()->json([
         'success' => true,
         'message' => 'Password reset token sent to email.',
-        'token' => $token // ⚠️ Only return in dev/testing, remove in production
     ], 200);
 });
 
