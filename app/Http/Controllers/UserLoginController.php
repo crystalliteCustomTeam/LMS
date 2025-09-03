@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 
 class UserLoginController extends Controller
 {
-    private function Userloing(Request $request)
+    public function Userloing(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
@@ -53,7 +53,7 @@ class UserLoginController extends Controller
         ], 200);
     }
 
-    private function userLogout(Request $request)
+    public function userLogout(Request $request)
     {
         $request->validate([
             'token' => 'required|string',

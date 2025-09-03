@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    private function CreatUser(Request $request)
+    public function CreatUser(Request $request)
     {
         $request->validate([
             'firstName' => 'required|string|max:100',
@@ -37,7 +37,7 @@ class UserController extends Controller
         ], 201);
     }
 
-    private function UpdateProfilePhaseOne(Request $request)
+    public function UpdateProfilePhaseOne(Request $request)
     {
         $request->validate([
             'gender' => 'required|in:male,female,other',
@@ -63,7 +63,7 @@ class UserController extends Controller
         ], 201);
     }
 
-    private function questionnaire(Request $request)
+    public function questionnaire(Request $request)
     {
         $request->validate([
             'user_ID' => 'required',
@@ -90,7 +90,7 @@ class UserController extends Controller
         ], 201);
     }
 
-    private function updateAfterProfile(Request $request)
+    public function updateAfterProfile(Request $request)
     {
         $request->validate([
             'gender' => 'in:male,female,other',
@@ -118,7 +118,7 @@ class UserController extends Controller
         }
     }
 
-    private function userForgetPassword(Request $request)
+    public function userForgetPassword(Request $request)
     {
         $request->validate([
             'email' => 'required|email|exists:users,email',
@@ -147,7 +147,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    private function userResetPasswotd(Request $request)
+    public function userResetPasswotd(Request $request)
     {
         $request->validate([
             'email' => 'required|email|exists:users,email',
